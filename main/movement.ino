@@ -1,12 +1,13 @@
-#include <Wire.h>
+// #include <Wire.h>
 
 #include "variables.h"
+#include "sensors.ino"
 
-const int MPU = 0x68; // MPU6050 I2C address
+/* const int MPU = 0x68; // MPU6050 I2C address
 
 float yaw = 0;
 float gyroZ, gyroAngleZ, gyroErrorZ;
-int c = 0;
+int c = 0; */
 
 float getYaw() {    // what file should this be in lol
     currTime = millis();
@@ -18,12 +19,9 @@ float getYaw() {    // what file should this be in lol
 }
 
 void forward() {  // move forward until an object is detected within a certain threshold distance
-    digitalWrite(ultrasonicSensors[1][1], LOW); // just front ultrasonic sensor, let's just say it's second one in array
-    delayMicroseconds(2); 
-    digitalWrite(ultrasonicSensors[1][1], HIGH); 
-    distanceFront = pulseIn(ultrasonicSensors[1][0], HIGH) * 343 * pow(10,-4) / 2;   // in cm
+    readUltrasonicSensors();
 
-    if (distanceFront >= 15) {   // if we check sensors before calling forward(), we can just start off with the digitalWrites
+    if (frontDist >= 15 && leftDist >= 15 && rightDist >= 15) {   // arbitrary for now
         digitalWrite(ENA, HIGH);
         digitalWrite(IN1, HIGH);
         digitalWrite(IN2, LOW);
@@ -32,11 +30,8 @@ void forward() {  // move forward until an object is detected within a certain t
         digitalWrite(IN4, LOW);
     }
 
-    while (distanceFront >= 15) {
-        digitalWrite(ultrasonicSensors[1][1], LOW); 
-        delayMicroseconds(2); 
-        digitalWrite(ultrasonicSensors[1][1], HIGH); 
-        distance = pulseIn(ultrasonicSensors[1][0], HIGH) * 343 * pow(10,-4) / 2;
+    while (frontDist >= 15 && leftDist >= 15 && rightDist >= 15) {
+        readUltrasonicSensors();
     }
 
     analogWrite(ENA, LOW);
@@ -50,5 +45,5 @@ void rotate(float degree) {
 }
 
 void aroundObstacle() {
-    
+
 }
