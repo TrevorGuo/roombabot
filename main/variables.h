@@ -1,5 +1,8 @@
 #include <MPU6050.h>
 
+#ifndef VARIABLES_H
+#define VARIABLES_H
+
 float yaw, leftDist, frontDist, rightDist = 0.0;
 float currTime, previousTime = 0.0;
 const float turnDegree = 0.0;
@@ -13,3 +16,4 @@ const int motorRight = 8;
 const int servo = 9;
 
 MPU6050 accelgyro;
+#endif //VARIABLES_H

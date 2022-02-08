@@ -12,6 +12,13 @@ void setup() {
   pinMode(motorLeft, OUTPUT);
   pinMode(motorRight, OUTPUT);
   pinMode(servo, OUTPUT);
+
+  // pinMode(IN1, OUTPUT); pinMode(IN2, OUTPUT);
+  // pinMode(IN3, OUTPUT); pinMode(IN4, OUTPUT);
+  // pinMode(ENA, OUTPUT); pinMode(ENB, OUTPUT);
+  
+  // pinMode(trigPin, OUTPUT);
+  // pinMode(echoPin, INPUT);
 }
 
 void loop() {

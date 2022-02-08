@@ -1,0 +1,6 @@
+{
+    "port": "/dev/cu.Bluetooth-Incoming-Port",
+    "configuration": "cpu=atmega2560",
+    "board": "arduino:avr:mega",
+    "sketch": "main/main.ino"
+}
