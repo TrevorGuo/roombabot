@@ -1,13 +1,14 @@
 #include "variables.h"
+#include "sensors.h"
 
 //Might want to add a for loop to get average distances for accuracy
 void getDistance(int dir) {     //0 = left, 1 = front, 2 = right {
     digitalWrite(ultrasonicSensors[dir][1], LOW);
-    delayMicroseconds(5);
+    delayMicroseconds(2);
     digitalWrite(ultrasonicSensors[dir][1], HIGH);
-    delayMicroseconds(10);
+    delayMicroseconds(5);
     digitalWrite(ultrasonicSensors[dir][1], LOW);
-
+    
     long duration = pulseIn(ultrasonicSensors[dir][0], HIGH);
     long cm = duration / 2 / 29.1;
 

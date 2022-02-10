@@ -1,19 +1,30 @@
-#include <MPU6050.h>
-
 #ifndef VARIABLES_H
 #define VARIABLES_H
+#include <Arduino.h>
+#include <MPU6050.h>
 
-float yaw, leftDist, frontDist, rightDist = 0.0;
-float currTime, previousTime = 0.0;
-const float turnDegree = 0.0;
-const float timeForward = 0.0;
-const float captureDist = 0.0;
+
+extern float yaw, leftDist, frontDist, rightDist;
+extern float elapsedTime, currTime, previousTime;
+extern float gyroZ, gyroAngleZ, gyroErrorZ;
+
+//constants
+extern const float turnDegree;
+extern const int motorSpeed;
+extern const float captureDist;
+
+//motors
+extern const int ENA;
+extern const int IN1;
+extern const int IN2;
+extern const int ENB;
+extern const int IN3;
+extern const int IN4;
 
 //left, middle, right
-const int ultrasonicSensors[3][2] = {{1,2},{3,4},{5,6}};
-const int motorLeft = 7;
-const int motorRight = 8;
-const int servo = 9;
+extern const int ultrasonicSensors[3][2];
+extern const int servo;
 
-MPU6050 accelgyro;
-#endif //VARIABLES_H
+extern MPU6050 accelgyro;
+
+#endif // VARIABLES_H
