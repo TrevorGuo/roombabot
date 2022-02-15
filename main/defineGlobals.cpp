@@ -26,3 +26,5 @@ const int IN4 = 11;
 
 const int ultrasonicSensors[3][2] = {{2,3}, {4,5}, {6,7}};
 const int servo = 9;
+
+MPU6050 accelgyro;

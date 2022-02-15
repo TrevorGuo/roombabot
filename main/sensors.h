@@ -3,5 +3,6 @@
 
 void getDistance(int dir);
 void readUltrasonicSensors();
+void getYaw();
 
 #endif

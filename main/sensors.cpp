@@ -1,5 +1,6 @@
 #include "variables.h"
 #include "sensors.h"
+#include <MPU6050.h>
 
 //Might want to add a for loop to get average distances for accuracy
 void getDistance(int dir) {     //0 = left, 1 = front, 2 = right {
@@ -26,4 +27,14 @@ void readUltrasonicSensors() {
     for (int i = 0; i < 3; i++) {
         getDistance(i);
     }
+}
+
+void getYaw() {
+    Vector norm = accelgyro.readNormalizeGyro();
+    currTime = millis();
+    elapsedTime = currTime - previousTime; 
+    Serial.print("Time: ");
+    Serial.print(elapsedTime);
+    yaw += norm.ZAxis * elapsedTime/1000;    // hello what is gyroAngleZ the angular displacement or velocity?? im tired now bye
+    previousTime = currTime;
 }
