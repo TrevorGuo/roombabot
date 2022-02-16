@@ -35,10 +35,10 @@ void forward() {  // move forward until an object is detected within a certain t
 }
 
 void rotate(float degree) {
-    initYaw = getYaw();
-    finalYaw = initYaw + degree;
+    float initYaw = getYaw();
+    float finalYaw = initYaw + degree;
     if (degree < 0) {
-        while (getYaw() - finalYaw) > 0.5) { // threshold 0.5º difference
+        while (getYaw() - finalYaw > 0.5) { // threshold 0.5º difference
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, LOW);
@@ -50,7 +50,7 @@ void rotate(float degree) {
         analogWrite(ENB, LOW);
     }
     else {
-        while (finalYaw - getYaw()) > 0.5) { 
+        while (finalYaw - getYaw() > 0.5) { 
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, LOW);
             digitalWrite(IN2, HIGH);
@@ -66,6 +66,7 @@ void rotate(float degree) {
 
 // call when obstacle detected, assume leftDist != rightDist?
 void aroundObstacle() {
+    float deg = 0.0;
     readUltrasonicSensors();
     if (leftDist > rightDist) {
         deg = 45; // change later
