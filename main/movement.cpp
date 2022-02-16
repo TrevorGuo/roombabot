@@ -63,6 +63,16 @@ void rotate(float degree) {
     }
 }
 
+// call when obstacle detected, assume leftDist != rightDist?
 void aroundObstacle() {
-
+    readUltrasonicSensors();
+    if (leftDist > rightDist) {
+        deg = 45; // change later
+    }
+    else {
+        deg = -45;
+    }
+    rotate(deg);
+    forward();
+    rotate(-deg);   // vs rotate(getYaw())
 }
