@@ -38,7 +38,7 @@ void rotate(float degree) {
     initYaw = getYaw();
     finalYaw = initYaw + degree;
     if (degree < 0) {
-        while (abs(getYaw() - finalYaw) > 0.5) { // threshold 0.5º difference
+        while (getYaw() - finalYaw) > 0.5) { // threshold 0.5º difference
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, LOW);
@@ -50,7 +50,7 @@ void rotate(float degree) {
         analogWrite(ENB, LOW);
     }
     else {
-        while (abs(getYaw() - finalYaw) > 0.5) { 
+        while (finalYaw - getYaw()) > 0.5) { 
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, LOW);
             digitalWrite(IN2, HIGH);
@@ -61,6 +61,7 @@ void rotate(float degree) {
         analogWrite(ENA, LOW);
         analogWrite(ENB, LOW);
     }
+    getYaw();
 }
 
 // call when obstacle detected, assume leftDist != rightDist?
@@ -74,5 +75,5 @@ void aroundObstacle() {
     }
     rotate(deg);
     forward();
-    rotate(-deg);   // vs rotate(getYaw())
+    rotate(-deg); 
 }
