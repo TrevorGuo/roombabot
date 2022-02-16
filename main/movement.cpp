@@ -13,7 +13,7 @@ void forward() {  // move forward until an object is detected within a certain t
     frontDist = 15;
     leftDist = 15;
     rightDist = 15;
-    if (frontDist >= 15 && leftDist >= 15 && rightDist >= 15) {   // arbitrary for now
+    if (frontDist >= 15 || leftDist >= 15 || rightDist >= 15) {   // arbitrary for now
         analogWrite(ENA, motorSpeed);
         digitalWrite(IN1, HIGH);
         digitalWrite(IN2, LOW);
@@ -35,16 +35,32 @@ void forward() {  // move forward until an object is detected within a certain t
 }
 
 void rotate(float degree) {
-    analogWrite(ENA, motorSpeed);
-    digitalWrite(IN1, HIGH);
-    digitalWrite(IN2, LOW);
-    analogWrite(ENB, motorSpeed);
-    digitalWrite(IN3, LOW);
-    digitalWrite(IN4, HIGH);
-
-    delay(5000);
-    analogWrite(ENA, LOW);
-    analogWrite(ENB, LOW);
+    initYaw = getYaw();
+    finalYaw = initYaw + degree;
+    if (degree < 0) {
+        while (abs(getYaw() - finalYaw) > 0.5) { // threshold 0.5º difference
+            analogWrite(ENA, motorSpeed);
+            digitalWrite(IN1, HIGH);
+            digitalWrite(IN2, LOW);
+            analogWrite(ENB, motorSpeed);
+            digitalWrite(IN3, LOW);
+            digitalWrite(IN4, HIGH);
+        }
+        analogWrite(ENA, LOW);
+        analogWrite(ENB, LOW);
+    }
+    else {
+        while (abs(getYaw() - finalYaw) > 0.5) { 
+            analogWrite(ENA, motorSpeed);
+            digitalWrite(IN1, LOW);
+            digitalWrite(IN2, HIGH);
+            analogWrite(ENB, motorSpeed);
+            digitalWrite(IN3, HIGH);
+            digitalWrite(IN4, LOW);
+        }
+        analogWrite(ENA, LOW);
+        analogWrite(ENB, LOW);
+    }
 }
 
 void aroundObstacle() {
