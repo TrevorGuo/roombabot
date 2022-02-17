@@ -36,7 +36,5 @@ void loop() {
   // put your main code here, to run repeatedly:
  
   rotate(90);
-  delay(5000);
   rotate(-90);
-  delay(5000);
 }

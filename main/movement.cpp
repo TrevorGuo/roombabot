@@ -34,6 +34,10 @@ void forward() {  // move forward until an object is detected within a certain t
     analogWrite(ENB, LOW);
 }
 
+/* equivalent degree values:
+ *  +/- 180º -> +/- 155º
+ *  +/- 90º -> +/- 68º
+ */ 
 void rotate(float degree) {
     float initYaw = getYaw();
     float finalYaw = initYaw + degree;
@@ -69,6 +73,7 @@ void rotate(float degree) {
         analogWrite(ENA, LOW);
         analogWrite(ENB, LOW);
     }
+    delay(5000);
 }
 
 // call when obstacle detected, assume leftDist != rightDist?
