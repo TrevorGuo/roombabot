@@ -34,7 +34,9 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  getYaw();
-  Serial.print(" Yaw: ");
-  Serial.println(yaw);
+ 
+  rotate(90);
+  delay(5000);
+  rotate(-90);
+  delay(5000);
 }

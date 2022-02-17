@@ -37,37 +37,44 @@ void forward() {  // move forward until an object is detected within a certain t
 void rotate(float degree) {
     float initYaw = getYaw();
     float finalYaw = initYaw + degree;
-    if (degree < 0) {
-        while (getYaw() - finalYaw > 0.5) { // threshold 0.5º difference
+    if (degree > 0) {
+        while (finalYaw - getYaw() > 2) { // threshold 0.5º difference
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, HIGH);
             digitalWrite(IN2, LOW);
             analogWrite(ENB, motorSpeed);
             digitalWrite(IN3, LOW);
             digitalWrite(IN4, HIGH);
+
+            getYaw();
+            Serial.print("Yaw: ");
+            Serial.println(yaw);
         }
         analogWrite(ENA, LOW);
         analogWrite(ENB, LOW);
     }
     else {
-        while (finalYaw - getYaw() > 0.5) { 
+        while (getYaw() - finalYaw > 2) { 
             analogWrite(ENA, motorSpeed);
             digitalWrite(IN1, LOW);
             digitalWrite(IN2, HIGH);
             analogWrite(ENB, motorSpeed);
             digitalWrite(IN3, HIGH);
             digitalWrite(IN4, LOW);
+
+            getYaw();
+            Serial.print("Yaw: ");
+            Serial.println(yaw);
         }
         analogWrite(ENA, LOW);
         analogWrite(ENB, LOW);
     }
-    getYaw();
 }
 
 // call when obstacle detected, assume leftDist != rightDist?
 void aroundObstacle() {
-    float deg = 0.0;
     readUltrasonicSensors();
+    float deg = 0.0;
     if (leftDist > rightDist) {
         deg = 45; // change later
     }
